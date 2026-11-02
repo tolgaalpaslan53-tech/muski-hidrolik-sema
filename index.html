@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="description" content="Çevrimdışı kullanılabilen hidrolik şema çizim ve tesis envanter uygulaması."/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <link rel="apple-touch-icon" href="icon-192.png"/>
+  <meta name="theme-color" content="#06152a"/>
+  <title>MUSKİ SCADA</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand"><span class="brandmark"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="none" stroke="#7ad8ff" stroke-width="1.5"/><path d="M22 5C15 16 11 21 11 28a11 11 0 0 0 22 0c0-7-4-12-11-23z" fill="#219cea" stroke="#b8ecff" stroke-width="1.5"/><path d="M17 29c0 5 3 7 8 7" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/></svg></span><span><strong>MUSKİ SCADA</strong><small>Hidrolik Şema Çizimi</small></span></div>
+    <span class="topbar-divider"></span>
+    <span class="project-title"><span class="title-drop">◆</span><span>Şema Çizim Atölyesi <small>Çevrimdışı çalışma • Canlı SCADA bağlantısı yok</small></span></span>
+    <div class="topbar-end"><span class="local-indicator"><i></i> Yerel proje</span><button id="newProjectTop" class="outline icontext" title="Yeni proje">＋ <span>Yeni Şema</span></button></div>
+  </header>
+  <div class="workspace" id="workspace" data-mobile-view="draw">
+    <nav class="navrail" aria-label="Ana menü">
+      <div class="nav-heading">ÇALIŞMA ALANI</div>
+      <button class="nav-button" data-nav="home"><span>⌂</span> Genel Bakış</button>
+      <button class="nav-button active" data-nav="draw"><span>⌘</span> Şema Çizimi</button>
+      <button class="nav-button" data-nav="inventory"><span>▤</span> Tesis Envanteri</button>
+      <button class="nav-button" data-nav="guide"><span>ⓘ</span> Kullanım Kılavuzu</button>
+      <div class="nav-space"></div>
+      <div class="nav-foot"><span class="nav-wave">≈</span><strong>SAHA PLANLAMA</strong><small>v1.0 • Taslak / Demo</small></div>
+    </nav>
+    <aside class="palette panel" aria-label="Çizim elemanları">
+      <div class="panel-title"><span>Çizim Elemanları</span><span class="panel-chip">10</span></div>
+      <p class="palette-hint">Sürükleyip ızgaraya bırakın veya elemana tıklayın.</p>
+      <div class="palette-section-label">TESİS & EKİPMANLAR</div>
+      <button class="palette-item" data-add="well" draggable="true"><span class="palette-icon" data-icon="well"></span><span>Kuyu</span><em>＋</em></button>
+      <button class="palette-item" data-add="tank" draggable="true"><span class="palette-icon" data-icon="tank"></span><span>Depo</span><em>＋</em></button>
+      <button class="palette-item" data-add="station" draggable="true"><span class="palette-icon" data-icon="station"></span><span>Terfi</span><em>＋</em></button>
+      <button class="palette-item" data-add="chamber" draggable="true"><span class="palette-icon" data-icon="chamber"></span><span>Maslak</span><em>＋</em></button>
+      <button class="palette-item" data-add="pump" draggable="true"><span class="palette-icon" data-icon="pump"></span><span>Pompa</span><em>＋</em></button>
+      <button class="palette-item" data-add="valve" draggable="true"><span class="palette-icon" data-icon="valve"></span><span>Vana</span><em>＋</em></button>
+      <button class="palette-item" data-add="meter" draggable="true"><span class="palette-icon" data-icon="meter"></span><span>Debimetre</span><em>＋</em></button>
+      <button class="palette-item" data-add="panel" draggable="true"><span class="palette-icon" data-icon="panel"></span><span>SCADA Panosu</span><em>＋</em></button>
+      <div class="palette-section-label">BAĞLANTILAR</div>
+      <button class="palette-item palette-line" data-connect="pipe"><span class="line-swatch pipe"></span><span>Boru Hattı</span><em>↗</em></button>
+      <button class="palette-item palette-line" data-connect="electric"><span class="line-swatch electric"></span><span>Elektrik Hattı</span><em>↗</em></button>
+      <div class="palette-tip"><span>💡</span><span>Hat çizmek için bağlantı türünü seçin, ardından sırasıyla iki elemana tıklayın.</span></div>
+    </aside>
+    <main class="central">
+      <section class="design-area panel">
+        <div class="design-header">
+          <div class="tabs"><button class="tab active" id="tabSchema">Şema</button><button class="tab" id="tabInfo">Proje Bilgileri</button></div>
+          <div class="project-meta"><input id="projectName" aria-label="Proje adı" value="Yatağan • Örnek Hidrolik Şema" title="Proje adını düzenle"/><span id="savedStatus" class="save-status">Hazır</span></div>
+        </div>
+        <div class="toolbar" role="toolbar" aria-label="Çizim araçları">
+          <div class="toolbar-left">
+            <button class="tool active" data-tool="select" title="Seç / Taşı (V)"><span>↖</span><small>Seç</small></button>
+            <button class="tool" data-tool="pan" title="Kaydır (H)"><span>✋</span><small>Kaydır</small></button>
+            <button class="tool" data-tool="pipe" title="Boru bağlantısı (B)"><span>⤳</span><small>Boru</small></button>
+            <button class="tool" data-tool="electric" title="Elektrik bağlantısı (E)"><span>ϟ</span><small>Elektrik</small></button>
+            <span class="toolbar-sep"></span>
+            <button class="tool" id="zoomIn" title="Yakınlaştır"><span>⊕</span><small>Yakınlaş</small></button>
+            <button class="tool" id="zoomOut" title="Uzaklaştır"><span>⊖</span><small>Uzaklaş</small></button>
+            <button class="tool" id="fitView" title="Görünümü sıfırla"><span>⛶</span><small>Sığdır</small></button>
+            <span class="toolbar-sep"></span>
+            <button class="tool" id="undoBtn" title="Geri al (Ctrl+Z)"><span>↶</span><small>Geri Al</small></button>
+            <button class="tool" id="redoBtn" title="Yinele (Ctrl+Y)"><span>↷</span><small>Yinele</small></button>
+            <button class="tool danger-tool" id="deleteBtn" title="Seçileni sil (Delete)"><span>♲</span><small>Sil</small></button>
+          </div>
+          <div class="toolbar-actions"><button id="saveProject" class="primary action">▣ Kaydet</button><button id="openProject" class="outline action">↥ Aç</button><div class="menu-wrap"><button id="exportToggle" class="outline action">⇩ Dışa Aktar ▾</button><div id="exportMenu" class="popup-menu hidden"><button id="exportPng">PNG görsel</button><button id="exportSvg">SVG vektör</button><button id="exportPdf">Yazdır / PDF</button></div></div></div>
+        </div>
+        <div id="canvasShell" class="canvas-shell" tabindex="0" aria-label="Hidrolik şema çizim alanı">
+          <svg id="schemeCanvas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Şema çizim yüzeyi"><defs>
+            <pattern id="minorGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#1b3753" stroke-width=".7"/></pattern>
+            <pattern id="majorGrid" width="100" height="100" patternUnits="userSpaceOnUse"><rect width="100" height="100" fill="url(#minorGrid)"/><path d="M100 0H0V100" fill="none" stroke="#235075" stroke-width="1"/></pattern>
+            <linearGradient id="pipePaint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5ddaff"/><stop offset=".4" stop-color="#239aff"/><stop offset="1" stop-color="#07569e"/></linearGradient>
+            <linearGradient id="tankPaint" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#59ddff"/><stop offset=".35" stop-color="#1688e3"/><stop offset="1" stop-color="#084b99"/></linearGradient>
+            <linearGradient id="steelPaint" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9f7ff"/><stop offset=".5" stop-color="#6f9bb9"/><stop offset="1" stop-color="#345873"/></linearGradient>
+            <linearGradient id="soilPaint" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stop-color="#a17c50"/><stop offset="1" stop-color="#483521"/></linearGradient>
+            <filter id="softGlow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <marker id="flowArrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#d6f7ff"/></marker>
+          </defs><rect x="0" y="0" width="1200" height="675" fill="#081f37"/><rect id="gridRect" x="0" y="0" width="1200" height="675" fill="url(#majorGrid)"/><g id="world"></g></svg>
+          <div id="canvasEmpty" class="canvas-empty hidden"><strong>Çizim alanı hazır</strong><span>Soldan bir tesis ekleyerek başlayın.</span></div>
+          <div class="canvas-help" id="canvasHelp">↖ Bir elemanı seçin veya sürükleyerek konumunu değiştirin.</div>
+          <div class="canvas-bottom"><span id="coords">X: — &nbsp; Y: —</span><span class="canvas-bottom-right"><label class="check-inline"><input id="gridToggle" type="checkbox" checked/> Izgara</label><label class="check-inline"><input id="snapToggle" type="checkbox" checked/> Hizala</label><span id="zoomText">100%</span></span></div>
+        </div>
+      </section>
+      <section class="inventory panel" id="inventoryPanel"><div class="inventory-head"><div class="panel-title">Tesis Envanteri <span class="count" id="equipmentCount">0</span></div><div class="inventory-controls"><input type="search" id="inventorySearch" placeholder="Tesis / ekipman ara..."/><button class="outline slim" id="newNodeBtn">＋ Ekle</button><button class="outline slim" id="exportCsv">⇩ CSV</button></div></div><div class="table-scroll"><table><thead><tr><th>NO</th><th>EKİPMAN / TESİS</th><th>TÜR</th><th>ELEKTRİK</th><th>SCADA PANOSU</th><th>POMPA</th><th>AÇIKLAMA</th></tr></thead><tbody id="inventoryBody"></tbody></table></div></section>
+    </main>
+    <aside class="properties panel" id="propertiesPanel"><div class="panel-title">Eleman Özellikleri <span class="properties-caption">MANUEL</span></div><div id="propertiesContent"></div></aside>
+  </div>
+  <nav class="mobile-dock" id="mobileDock" aria-label="Mobil çalışma menüsü">
+    <button type="button" class="dock-btn" data-mobile-view="elements"><span aria-hidden="true">⊞</span><small>Elemanlar</small></button>
+    <button type="button" class="dock-btn active" data-mobile-view="draw"><span aria-hidden="true">⌘</span><small>Çizim</small></button>
+    <button type="button" class="dock-btn" data-mobile-view="properties"><span aria-hidden="true">☷</span><small>Bilgiler</small></button>
+    <button type="button" class="dock-btn" data-mobile-view="inventory"><span aria-hidden="true">▤</span><small>Envanter</small></button>
+  </nav>
+  <footer class="footer"><span><i></i> <b>Çevrimdışı Çalışma</b></span><span id="footerProject">Örnek Şema</span><span>Eleman: <b id="footerNodeCount">0</b> &nbsp;·&nbsp; Hat: <b id="footerEdgeCount">0</b></span><span class="footer-last">MUSKİ SCADA • v2.0</span></footer>
+</div>
+<input id="projectInput" type="file" accept=".json,application/json" hidden/>
+<div id="toast" role="status" class="toast" aria-live="polite"></div>
+<div id="modal" class="modal-backdrop hidden"><div class="modal"><h2 id="modalTitle">Yeni Proje</h2><p id="modalMessage">Mevcut çizim silinecek.</p><div class="modal-buttons"><button id="modalCancel" class="outline">Vazgeç</button><button id="modalConfirm" class="primary">Onayla</button></div></div></div>
+<script src="app.js"></script>
+</body>
+</html>
