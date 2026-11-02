@@ -1,14 +1,6 @@
-/* App shell only: does not cache or upload user drawings. */
-const CACHE='muski-hidrolik-v2-scada-20261102';
-const FILES=['./','./index.html','./styles.css','./app.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
-self.addEventListener('install',event=>{
- event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting()));
-});
-self.addEventListener('activate',event=>{
- event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('muski-hidrolik-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));
-});
-self.addEventListener('fetch',event=>{
- const request=event.request;
- if(request.method!=='GET'||new URL(request.url).origin!==location.origin)return;
- event.respondWith(caches.match(request).then(cached=>cached||fetch(request)));
-});
+/* Cache only the static application. Projects remain local to the user's device. */
+const CACHE='muski-scada-v3-20261102b';
+const ASSETS=['./','./index.html','./app.js','./styles.css','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('muski-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',event=>{if(event.request.method!=='GET'||new URL(event.request.url).origin!==location.origin)return;event.respondWith(fetch(event.request).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(event.request,copy)).catch(()=>{});}return res;}).catch(()=>caches.match(event.request)));});

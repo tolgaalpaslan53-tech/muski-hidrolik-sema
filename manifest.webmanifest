@@ -1,25 +1,12 @@
 {
   "name": "MUSKİ SCADA",
   "short_name": "MUSKİ SCADA",
-  "description": "Çevrimdışı hidrolik şema çizimi ve teknik envanter",
+  "description": "Hidrolik şema çizimi ve manuel tesis bilgileri",
   "lang": "tr",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#061427",
-  "theme_color": "#06152a",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+  "background_color": "#07192d",
+  "theme_color": "#07192d",
+  "icons": [{"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},{"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]
 }

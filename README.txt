@@ -1,42 +1,25 @@
-MUSKİ SCADA — V2 (Mobil + Masaüstü)
+MUSKİ SCADA — V3.1 (görsel şablonlu sade çizim)
 
-DURUM: Çalışan prototip, canlı SCADA/PLC bağlantısı içermez.
+ÖNCEKİ V3'Ü YÜKLEMEDİYSEN doğrudan bunu GitHub deposuna yükleyebilirsin.
 
-Tüm cihazlarda ortak uygulama:
-- Windows/Mac bilgisayarda Chrome / Edge / Safari
-- iPhone: Safari (Ana Ekrana Ekle)
-- Android: Chrome (Ana ekrana ekle / Uygulamayı yükle)
+Görsel şablonlar: Kuyu (toprak kesitli dalgıç pompalı), Depo, Terfi, Maslak,
+Vana, Pompa, Debimetre. SCADA panosu çizim elemanı değildir; tesis
+özelliklerinde Var/Yok bilgisi olarak bulunur.
 
-YAYINLAMA:
-1. Bu klasördeki DOSYALARIN TÜMÜNÜ (index.html, app.js, styles.css,
-   manifest.webmanifest, service-worker.js, icon dosyaları) bir GitHub Pages
-   deposunun kök dizinine yükleyin.
-2. GitHub Settings > Pages > Deploy from branch, main/(root) seçin.
-3. Açılan HTTPS adresi hem iPhone hem Android hem bilgisayarda çalışır.
-4. İlk çevrimiçi açılışta uygulama kabuğu önbelleğe alınır; sonrasında
-   internet olmasa bile (tarayıcı önbelleği silinmedikçe) açılabilir.
-5. iPhone'da Safari Paylaş > Ana Ekrana Ekle;
-   Android'de Chrome ⋮ > Ana ekrana ekle/Uygulamayı yükle.
+KULLANIM:
+1. Eleman Ekle → görsel şablon seç.
+2. Şablonu sürükleyerek şemada taşı.
+3. Şablona dokun → pompa sayısı, elektrik ve SCADA var/yok gibi bilgileri doldur.
+4. Hat Çiz → ilk ve ikinci elemana dokun. Bağlantı çizilir.
+5. Kaydet → proje dosyası indir (.muski.json). Proje → Aç ile geri yüklenir.
 
-Yerel bilgisayarda kurulum gerekmez: index.html'i açmanız yeterlidir.
-Telefonlarda ZIP/Dosyalar'dan HTML açmak tutarsız olduğundan HTTPS üzerinden
-GitHub Pages yayını önerilir. GitHub Pages'de şema dosyaları sunucuya
-otomatik yüklenmez; sadece indirilen yerel JSON dosyalarında saklanır.
+GİTHUB:
+GitHub'da yeni MUSKİ deposunun ana dizinine ZIP'in İÇİNDEKİ sekiz dosyayı
+(index.html, app.js, styles.css, README.txt, service-worker.js,
+manifest.webmanifest, icon-192.png, icon-512.png) yükle. ZIP'i yükleme.
+Eski dosyaları aynı adlarla değiştir. Commit changes sonrası Pages güncellenir.
+Uygulama adı: MUSKİ SCADA.
 
-MOBİL KULLANIM:
-- Alt menü: Elemanlar, Çizim, Bilgiler, Envanter.
-- Elemanlar'a girip örneğin Kuyu'ya dokunun; çizim ekranına eklenir.
-- Elemanı tek parmakla taşıyın. Boş alanda tek parmakla kaydırın.
-- İki parmakla yakınlaştırıp uzaklaştırın.
-- 'Boru' veya 'Elektrik' aracını seçin ve iki elemana sırayla dokunun.
-- Bilgiler ekranında seçilen elemanın özelliklerini değiştirin.
-- Kaydet: .muski.json proje dosyası indirir; Aç: dosyayı yeniden okur.
-- Dışa Aktar > PNG, SVG, yazdır/PDF. PDF seçeneğinin işleyişi tarayıcıya
-  bağlıdır. Proje kaydını cihazın Dosyalar/İndirilenler alanında saklayın.
-
-GÜVENLİK:
-Gerçek altyapı bilgilerini internete yayınlanmış HTML/JavaScript içine
-örnek veri olarak koymayın. Çizim JSON dosyalarını paylaşırken kurumun
-veri güvenliği ve yetki kurallarına uyun.
-
-V2: iPhone / Android uyarlaması, dokunmatik çizim ve mobil alt menü.
+NOT: Tamamen manuel çizim + teknik envanter. Canlı SCADA/PLC bağlantısı yok.
+GitHub Pages'te gerçek tesis bilgileri veya gizli bağlantı bilgileri
+paylaşılmamalı. Yerel taslak cihaza özeldir, cihazlar arasında eşitlenmez.
